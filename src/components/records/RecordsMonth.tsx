@@ -5,7 +5,7 @@ import { RecordModal, Record } from "./RecordModal";
 import { RecordTableRow } from "./RecordTableRow";
 import { Table, TableBody, TableHead, TableHeader, TableRow } from "../ui/table";
 import { Skeleton } from "../ui/skeleton";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 import { Badge } from "../ui/badge";
 
 interface RecordsMonthProps {

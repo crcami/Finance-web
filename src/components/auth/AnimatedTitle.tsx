@@ -82,7 +82,6 @@ export function AnimatedTitle({
       };
     }
 
-    // Mix com posição Y para mais variedade
     const yMix = Math.abs(normalizedY - 0.5) * 0.3;
     color.r = Math.round(color.r * (1 - yMix) + 255 * yMix);
     color.g = Math.round(color.g * (1 - yMix) + 255 * yMix);

@@ -1,0 +1,1748 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Finance API",
+        "description": "This is the official API documentation for the Finance project.\nIt lists the available endpoints and how to authenticate using Bearer JWT.\n",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Local development"
+        }
+    ],
+    "security": [
+        {
+            "bearer-jwt": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Categories",
+            "description": "Current user's categories"
+        },
+        {
+            "name": "Users",
+            "description": "Current user's profile and password management"
+        },
+        {
+            "name": "Reports",
+            "description": "Financial reports for the current user"
+        },
+        {
+            "name": "Auth",
+            "description": "Register, login, refresh, logout and session check"
+        },
+        {
+            "name": "Records",
+            "description": "Income/expense records management"
+        }
+    ],
+    "paths": {
+        "/users/me": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user's profile",
+                "operationId": "me",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseUserProfileResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update current user's profile",
+                "operationId": "update",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProfileRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseUserProfileResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/users/me/password": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Change current user's password",
+                "operationId": "changePassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePasswordRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseVoid"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/records/{id}": {
+            "get": {
+                "tags": [
+                    "Records"
+                ],
+                "summary": "Get record by id",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseRecordResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Records"
+                ],
+                "summary": "Update record by id",
+                "operationId": "update_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RecordRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseRecordResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get a category by id",
+                "operationId": "get_1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseCategoryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Update a category",
+                "operationId": "update_2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoryRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseCategoryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete a category",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseVoid"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Archive or unarchive a category",
+                "operationId": "patch",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoryPatchRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseCategoryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/records/bulk": {
+            "post": {
+                "tags": [
+                    "Records"
+                ],
+                "summary": "Bulk create records (idempotent by X-Request-Id)",
+                "operationId": "bulkCreate",
+                "parameters": [
+                    {
+                        "name": "X-Request-Id",
+                        "in": "header",
+                        "description": "Idempotency key to safely retry the same request",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/RecordRequest"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseBulkResult"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "List categories (filterable and pageable)",
+                "operationId": "list",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Case-insensitive search on name/alias",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "archived",
+                        "in": "query",
+                        "description": "Filter by archived status (true/false)",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Zero-based page index (0..N)",
+                        "required": false,
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "The size of the page to be returned",
+                        "required": false,
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer",
+                            "default": 20
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": [
+                                "name,ASC"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageResponseCategoryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Create a new category for the current user",
+                "operationId": "create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CategoryRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseCategoryResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user (e-mail + password) and sign in",
+                "operationId": "register",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseLoginResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh access token using a valid refresh token",
+                "operationId": "refresh",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RefreshRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseLoginResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout current session (requires authentication)",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseVoid"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate with credentials and start a session",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseLoginResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/records/{id}/confirm": {
+            "patch": {
+                "tags": [
+                    "Records"
+                ],
+                "summary": "Confirm record (paid/received) depending on kind",
+                "operationId": "confirm",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseRecordResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/reports/summary": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Summary (income, expense, balance) for a period",
+                "operationId": "summary",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Start date (defaults to 90 days ago)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2025-07-25"
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "End date (defaults to today)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2025-10-23"
+                    },
+                    {
+                        "name": "categoryIds",
+                        "in": "query",
+                        "description": "Filter by category IDs (repeat param: ?categoryIds=...&categoryIds=...)",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSummaryReport"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/reports/forecast": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Naive forecast using 3-month moving average",
+                "operationId": "forecast",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Start date (defaults to 90 days ago)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "End date (defaults to today)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "categoryIds",
+                        "in": "query",
+                        "description": "Filter by category IDs (repeat param)",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    },
+                    {
+                        "name": "monthsAhead",
+                        "in": "query",
+                        "description": "How many months to forecast ahead",
+                        "required": false,
+                        "schema": {
+                            "maximum": 24,
+                            "minimum": 1,
+                            "type": "string",
+                            "default": "3"
+                        },
+                        "example": 3
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseListForecastItem"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/reports/cashflow": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Monthly cashflow within a period",
+                "operationId": "cashflow",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Start date (defaults to 90 days ago)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "End date (defaults to today)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "categoryIds",
+                        "in": "query",
+                        "description": "Filter by category IDs (repeat param)",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseCashflowReport"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/reports/by-category": {
+            "get": {
+                "tags": [
+                    "Reports"
+                ],
+                "summary": "Totals by category within a period (pageable)",
+                "operationId": "byCategory",
+                "parameters": [
+                    {
+                        "name": "from",
+                        "in": "query",
+                        "description": "Start date (defaults to 90 days ago)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "to",
+                        "in": "query",
+                        "description": "End date (defaults to today)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "categoryIds",
+                        "in": "query",
+                        "description": "Filter by category IDs (repeat param)",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Zero-based page index (0..N)",
+                        "required": false,
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "The size of the page to be returned",
+                        "required": false,
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer",
+                            "default": 20
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": [
+                                "name,ASC"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponsePageResponseCategoryReportItem"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/session": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Return session status and current user id (if authenticated)",
+                "operationId": "session",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseSessionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/records": {
+            "delete": {
+                "tags": [
+                    "Records"
+                ],
+                "summary": "Delete many records (body is array of UUIDs)",
+                "operationId": "deleteMany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponseMapStringLong"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer-jwt": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UpdateProfileRequest": {
+                "required": [
+                    "fullName"
+                ],
+                "type": "object",
+                "properties": {
+                    "fullName": {
+                        "maxLength": 120,
+                        "minLength": 0,
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseUserProfileResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/UserProfileResponse"
+                    }
+                }
+            },
+            "UserProfileResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "fullName": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ChangePasswordRequest": {
+                "required": [
+                    "currentPassword",
+                    "newPassword"
+                ],
+                "type": "object",
+                "properties": {
+                    "currentPassword": {
+                        "type": "string"
+                    },
+                    "newPassword": {
+                        "maxLength": 2147483647,
+                        "minLength": 8,
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseVoid": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object"
+                    }
+                }
+            },
+            "RecordRequest": {
+                "required": [
+                    "amount",
+                    "dueDate",
+                    "kind",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "kind": {
+                        "type": "string",
+                        "enum": [
+                            "INCOME",
+                            "EXPENSE"
+                        ]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "PENDING",
+                            "PAID",
+                            "RECEIVED",
+                            "CANCELED"
+                        ]
+                    },
+                    "amount": {
+                        "minimum": 0.00,
+                        "exclusiveMinimum": false,
+                        "type": "number"
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "description": {
+                        "maxLength": 255,
+                        "minLength": 0,
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseRecordResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/RecordResponse"
+                    }
+                }
+            },
+            "RecordResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "kind": {
+                        "type": "string",
+                        "enum": [
+                            "INCOME",
+                            "EXPENSE"
+                        ]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "PENDING",
+                            "PAID",
+                            "RECEIVED",
+                            "CANCELED"
+                        ]
+                    },
+                    "amount": {
+                        "type": "number"
+                    },
+                    "dueDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "paidAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CategoryRequest": {
+                "required": [
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "maxLength": 60,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "color": {
+                        "pattern": "^$|^#[0-9A-Fa-f]{6}$",
+                        "type": "string"
+                    }
+                }
+            },
+            "ApiResponseCategoryResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CategoryResponse"
+                    }
+                }
+            },
+            "CategoryResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "archived": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ApiResponseBulkResult": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/BulkResult"
+                    }
+                }
+            },
+            "BulkResult": {
+                "type": "object",
+                "properties": {
+                    "created": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "failed": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "RegisterRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "User e-mail (unique)",
+                        "example": "cami@example.com"
+                    },
+                    "password": {
+                        "maxLength": 72,
+                        "minLength": 8,
+                        "type": "string",
+                        "description": "Strong password (min 8 chars, mixed case, number, symbol)",
+                        "example": "Str0ng!Pass1"
+                    }
+                },
+                "description": "Payload to create a new user account"
+            },
+            "ApiResponseLoginResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/LoginResponse"
+                    }
+                }
+            },
+            "JwtPair": {
+                "type": "object",
+                "properties": {
+                    "accessToken": {
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginResponse": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "tokens": {
+                        "$ref": "#/components/schemas/JwtPair"
+                    }
+                }
+            },
+            "RefreshRequest": {
+                "required": [
+                    "refreshToken"
+                ],
+                "type": "object",
+                "properties": {
+                    "refreshToken": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginRequest": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CategoryPatchRequest": {
+                "required": [
+                    "archived"
+                ],
+                "type": "object",
+                "properties": {
+                    "archived": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ApiResponseSummaryReport": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/SummaryReport"
+                    }
+                }
+            },
+            "SummaryReport": {
+                "type": "object",
+                "properties": {
+                    "totalIncome": {
+                        "type": "number"
+                    },
+                    "totalExpense": {
+                        "type": "number"
+                    },
+                    "balance": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ApiResponseListForecastItem": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ForecastItem"
+                        }
+                    }
+                }
+            },
+            "ForecastItem": {
+                "type": "object",
+                "properties": {
+                    "month": {
+                        "type": "object",
+                        "properties": {
+                            "year": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "month": {
+                                "type": "string",
+                                "enum": [
+                                    "JANUARY",
+                                    "FEBRUARY",
+                                    "MARCH",
+                                    "APRIL",
+                                    "MAY",
+                                    "JUNE",
+                                    "JULY",
+                                    "AUGUST",
+                                    "SEPTEMBER",
+                                    "OCTOBER",
+                                    "NOVEMBER",
+                                    "DECEMBER"
+                                ]
+                            },
+                            "monthValue": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "leapYear": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "projectedIncome": {
+                        "type": "number"
+                    },
+                    "projectedExpense": {
+                        "type": "number"
+                    },
+                    "projectedBalance": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ApiResponseCashflowReport": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/CashflowReport"
+                    }
+                }
+            },
+            "CashflowItem": {
+                "type": "object",
+                "properties": {
+                    "month": {
+                        "type": "object",
+                        "properties": {
+                            "year": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "month": {
+                                "type": "string",
+                                "enum": [
+                                    "JANUARY",
+                                    "FEBRUARY",
+                                    "MARCH",
+                                    "APRIL",
+                                    "MAY",
+                                    "JUNE",
+                                    "JULY",
+                                    "AUGUST",
+                                    "SEPTEMBER",
+                                    "OCTOBER",
+                                    "NOVEMBER",
+                                    "DECEMBER"
+                                ]
+                            },
+                            "monthValue": {
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "leapYear": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "income": {
+                        "type": "number"
+                    },
+                    "expense": {
+                        "type": "number"
+                    },
+                    "balance": {
+                        "type": "number"
+                    }
+                }
+            },
+            "CashflowReport": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CashflowItem"
+                        }
+                    },
+                    "totalIncome": {
+                        "type": "number"
+                    },
+                    "totalExpense": {
+                        "type": "number"
+                    },
+                    "balance": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ApiResponsePageResponseCategoryReportItem": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/PageResponseCategoryReportItem"
+                    }
+                }
+            },
+            "CategoryReportItem": {
+                "type": "object",
+                "properties": {
+                    "categoryId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "income": {
+                        "type": "number"
+                    },
+                    "expense": {
+                        "type": "number"
+                    },
+                    "net": {
+                        "type": "number"
+                    }
+                }
+            },
+            "PageResponseCategoryReportItem": {
+                "type": "object",
+                "properties": {
+                    "content": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CategoryReportItem"
+                        }
+                    },
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ApiResponsePageResponseCategoryResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/PageResponseCategoryResponse"
+                    }
+                }
+            },
+            "PageResponseCategoryResponse": {
+                "type": "object",
+                "properties": {
+                    "content": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CategoryResponse"
+                        }
+                    },
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "ApiResponseSessionResponse": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/SessionResponse"
+                    }
+                }
+            },
+            "SessionResponse": {
+                "type": "object",
+                "properties": {
+                    "authenticated": {
+                        "type": "boolean"
+                    },
+                    "userId": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            },
+            "ApiResponseMapStringLong": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer-jwt": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
