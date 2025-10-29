@@ -48,7 +48,7 @@ export function RegisterForm({ onRegister, onSwitchToLogin }: RegisterFormProps)
                 <div className="space-y-2">
                   <Label htmlFor="full_name">Nome completo</Label>
                   <Input
-                    id="full_name"           // 👈 corrige o id (tava "full_nme")
+                    id="full_name"           
                     name="full_name"
                     autoComplete="name"
                     type="text"
@@ -123,7 +123,7 @@ export function RegisterForm({ onRegister, onSwitchToLogin }: RegisterFormProps)
           <Card className="backdrop-blur-md bg-[#FFFFFFDD] border-[#FFFFFF44] shadow-2xl rounded-2xl">
             <CardHeader>
               <CardTitle className="text-[#1A2A4F]" style={{ fontWeight: 700 }}>
-                Meu Aplicativo de Finanças
+                Finance Aplicativo
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-8">
@@ -137,7 +137,7 @@ export function RegisterForm({ onRegister, onSwitchToLogin }: RegisterFormProps)
               <div className="flex justify-center pb-4">
                 <img
                   src={logoImage}
-                  alt="Logo Meu Aplicativo de Finanças"
+                  alt="Logo Finance Aplicativo"
                   className="max-w-[200px] w-full h-auto object-contain"
                 />
               </div>

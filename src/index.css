@@ -180,6 +180,18 @@
     font-weight: inherit;
   }
 
+  @layer components {
+
+  .title--login[data-slot="card-title"] {
+    color: #11224e;
+    font-weight: 700;          
+    font-size: 25px;      
+    line-height: 1.25;        
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+}
+
   a {
     color: inherit;
     -webkit-text-decoration: inherit;

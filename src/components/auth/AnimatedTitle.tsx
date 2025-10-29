@@ -8,7 +8,7 @@ interface AnimatedTitleProps {
 }
 
 export function AnimatedTitle({ 
-  text = "Meu Aplicativo de Finanças", 
+  text = "Finance Aplicativo", 
   fontSize = "3rem",
   className = "mb-12",
   align = "center"

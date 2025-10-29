@@ -1,0 +1,33 @@
+.login-password {
+  position: relative;
+  width: 100%;
+}
+
+.login-password .login-password__input {
+  padding-right: 2.5rem; 
+}
+
+.login-password__toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #11224E;              
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.login-password__toggle:hover { opacity: 0.9; }
+
+.login-password__icon {
+  width: 20px;
+  height: 20px;
+}

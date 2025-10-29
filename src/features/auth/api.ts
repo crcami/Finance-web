@@ -42,3 +42,25 @@ export async function Logout(): Promise<void> {
     clearTokens();
   }
 }
+
+
+export const financeApi = {
+  async resetPassword(email: string) {
+    const { data } = await api.post<ApiEnvelope<void>>(
+      "/auth/reset-password",
+      { email }
+    );
+    return data.message ?? "Se o e-mail existir, enviaremos instruções para redefinição.";
+  },
+
+  async getUserByEmail(email: string) {
+    const { data } = await api.get<ApiEnvelope<{ full_name: string }>>(
+      "/users/by-email",
+      { params: { email } }
+    );
+    return data.data;
+  },
+};
+
+
+
